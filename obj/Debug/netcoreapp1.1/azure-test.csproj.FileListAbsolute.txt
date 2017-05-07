@@ -1,0 +1,8 @@
+c:\Users\champ\Git\azure-test\bin\Debug\netcoreapp1.1\azure-test.deps.json
+c:\Users\champ\Git\azure-test\bin\Debug\netcoreapp1.1\azure-test.runtimeconfig.json
+c:\Users\champ\Git\azure-test\bin\Debug\netcoreapp1.1\azure-test.runtimeconfig.dev.json
+c:\Users\champ\Git\azure-test\bin\Debug\netcoreapp1.1\azure-test.dll
+c:\Users\champ\Git\azure-test\bin\Debug\netcoreapp1.1\azure-test.pdb
+c:\Users\champ\Git\azure-test\obj\Debug\netcoreapp1.1\azure-test.AssemblyInfo.cs
+c:\Users\champ\Git\azure-test\obj\Debug\netcoreapp1.1\azure-test.dll
+c:\Users\champ\Git\azure-test\obj\Debug\netcoreapp1.1\azure-test.pdb
