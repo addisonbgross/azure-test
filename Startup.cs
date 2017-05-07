@@ -14,6 +14,7 @@ namespace azure_test
     {
         public Startup(IHostingEnvironment env)
         {
+            // builder
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
