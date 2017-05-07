@@ -1,2 +1,3 @@
-# azure-test
-Exactly what it sounds like
+# Azure Test
+Checking out the Microsoft ASP.NET MVC stack, hosted on Azure
+
