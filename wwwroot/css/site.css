@@ -22,3 +22,28 @@ textarea {
     justify-content: space-between;
     width: 100%;
 }
+
+.col-list {
+    position: relative;
+    width: 100%;
+}
+
+.pokemon-sprite {
+    background-color: #FFF;
+    border-radius: 100%;
+}
+
+.pokemon-sprite-big {
+    width: 150px;
+    height: auto;
+}
+
+.pokemon-current {
+    position: fixed;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.pokemon-sprite:hover {
+    background-color: #BBB;
+}

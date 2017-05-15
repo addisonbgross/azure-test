@@ -1,13 +1,22 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var AllTypes = (String[]) ViewData["allTypes"];
 }
 
 <!-- Pokemon type -->
 <h1>Type: @ViewData["type"]</h1>
+<select ng-model="currentType" ng-init>
+    @{int i = 0;}
+    @foreach (var type in AllTypes)
+    {
+        <option value="@i">@type</option>
+        ++i;
+    }
+</select>
 
-<div class="pokemon-list-container">
+<div ng-controller="PokemonController" class="pokemon-list-container">
     <!-- moves list -->
-    <div>
+    <div class="col-list">
         <h3>Moves:</h3>
         <ul>
         @foreach (var item in ViewData["moves"] as IEnumerable<String>)
@@ -19,39 +28,23 @@
 
     <!-- pokemon list -->
     <div>
-        <h3>Pokemon:</h3>
         <ul>
-        @{int i = 0;}
+        @{i = 0;}
         @foreach (var item in ViewData["pokemon"] as IEnumerable<String>)
         {
-            <li>@item</li>
             var sprites = (String[]) ViewData["sprites"];
             var url = sprites[@i];
-            <img src=@url />
+            <img ng-click="show('@item', '@url')" class="pokemon-sprite" src=@url />
             i++;   
         }
         </ul>
     </div>
 
-    <!-- weakness list -->
-    <div>
-        <h3>Weakness:</h3>
-        <ul>
-        @foreach (var item in ViewData["weak"] as IEnumerable<String>)
-        {
-            <li>@item</li>   
-        }
-        </ul>
-    </div>
-
-    <!-- no damage from list -->
-    <div>
-        <h3>No Damage From:</h3>
-        <ul>
-        @foreach (var item in ViewData["noDamage"] as IEnumerable<String>)
-        {
-            <li>@item</li>   
-        }
-        </ul>
+    <!-- current pokemon -->
+    <div class="col-list">
+        <div class="pokemon-current" ng-show="currentSprite != null">
+            <h3>{{ currentName }}</h3>
+            <img class="pokemon-sprite-big" src="{{ currentSprite }}" />
+        </div>
     </div>
 </div>

@@ -26,14 +26,33 @@ namespace azure_test.Controllers
             return workList.ToArray();
         }
 
+        private dynamic convertResponse(dynamic response) 
+        {
+            var content = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject(content);
+        }
+
         public IActionResult Index()
         {
-            // get all Ghost type information
-            var response = Client.GetAsync("http://pokeapi.co/api/v2/type/8/").Result;
+            // get ALL types
+            var response = Client.GetAsync("http://pokeapi.co/api/v2/type").Result;
             if (response.IsSuccessStatusCode)
             {
-                var content = response.Content.ReadAsStringAsync().Result;
-                dynamic jsonContent = JsonConvert.DeserializeObject(content);
+                dynamic jsonContent = convertResponse(response);
+
+                workList.Clear();
+                foreach (dynamic element in jsonContent["results"])
+                {
+                    workList.Add(element["name"].ToString());
+                }
+                ViewData["allTypes"] = workList.ToArray();
+            }
+
+            // get all Ghost type information
+            response = Client.GetAsync("http://pokeapi.co/api/v2/type/3/").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                dynamic jsonContent = convertResponse(response);
 
                 // get type
                 ViewData["type"] = jsonContent["name"];
