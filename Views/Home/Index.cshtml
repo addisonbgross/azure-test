@@ -1,50 +1,51 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
     var AllTypes = (String[]) ViewData["allTypes"];
 }
 
-<!-- Pokemon type -->
-<h1>Type: @ViewData["type"]</h1>
-<select ng-model="currentType" ng-init>
-    @{int i = 0;}
-    @foreach (var type in AllTypes)
-    {
-        <option value="@i">@type</option>
-        ++i;
-    }
-</select>
-
-<div ng-controller="PokemonController" class="pokemon-list-container">
-    <!-- moves list -->
-    <div class="col-list">
-        <h3>Moves:</h3>
-        <ul>
-        @foreach (var item in ViewData["moves"] as IEnumerable<String>)
+<div ng-controller="PokemonController">
+    <!-- Pokemon type -->
+    <h1>Type: @ViewData["type"]</h1>
+    <select ng-model="selectedType" ng-change="updateList()">
+        @{int i = 0;}
+        @foreach (var type in AllTypes)
         {
-            <li>@item</li>   
+            <option value="@i">@type</option>
+            ++i;
         }
-        </ul>
-    </div>
+    </select>
 
-    <!-- pokemon list -->
-    <div>
-        <ul>
-        @{i = 0;}
-        @foreach (var item in ViewData["pokemon"] as IEnumerable<String>)
-        {
-            var sprites = (String[]) ViewData["sprites"];
-            var url = sprites[@i];
-            <img ng-click="show('@item', '@url')" class="pokemon-sprite" src=@url />
-            i++;   
-        }
-        </ul>
-    </div>
+    <div class="pokemon-list-container">
+        <!-- moves list -->
+        <div class="col-list">
+            <h3>Moves:</h3>
+            <ul>
+            @foreach (var item in ViewData["moves"] as IEnumerable<String>)
+            {
+                <li>@item</li>   
+            }
+            </ul>
+        </div>
 
-    <!-- current pokemon -->
-    <div class="col-list">
-        <div class="pokemon-current" ng-show="currentSprite != null">
-            <h3>{{ currentName }}</h3>
-            <img class="pokemon-sprite-big" src="{{ currentSprite }}" />
+        <!-- pokemon list -->
+        <div>
+            <ul>
+            @{i = 0;}
+            @foreach (var item in ViewData["pokemon"] as IEnumerable<String>)
+            {
+                var sprites = (String[]) ViewData["sprites"];
+                var url = sprites[@i];
+                <img ng-click="show('@item', '@url')" class="pokemon-sprite" src=@url />
+                i++;   
+            }
+            </ul>
+        </div>
+
+        <!-- current pokemon -->
+        <div class="col-list">
+            <div class="pokemon-current" ng-show="currentSprite != null">
+                <h3>{{ currentName }}</h3>
+                <img class="pokemon-sprite-big" src="{{ currentSprite }}" />
+            </div>
         </div>
     </div>
 </div>

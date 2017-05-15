@@ -54,7 +54,8 @@ namespace azure_test
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller}/{action}/{id?}",
+                    defaults: new {controller="Home", action="Index", id = 1});
             });
         }
     }

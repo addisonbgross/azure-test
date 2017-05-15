@@ -32,7 +32,7 @@ namespace azure_test.Controllers
             return JsonConvert.DeserializeObject(content);
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
             // get ALL types
             var response = Client.GetAsync("http://pokeapi.co/api/v2/type").Result;
@@ -49,7 +49,7 @@ namespace azure_test.Controllers
             }
 
             // get all Ghost type information
-            response = Client.GetAsync("http://pokeapi.co/api/v2/type/3/").Result;
+            response = Client.GetAsync("http://pokeapi.co/api/v2/type/" + id + "/").Result;
             if (response.IsSuccessStatusCode)
             {
                 dynamic jsonContent = convertResponse(response);
@@ -73,23 +73,8 @@ namespace azure_test.Controllers
                 }
                 ViewData["pokemon"] = workList.ToArray();
                 ViewData["sprites"] = spriteList.ToArray();
-
-                // get damage relations
-                workList.Clear();
-                foreach (dynamic type in jsonContent["damage_relations"]["half_damage_from"])
-                {
-                    workList.Add(type["name"].ToString());
-                }
-                ViewData["weak"] = workList.ToArray();
-
-                workList.Clear();
-                foreach (dynamic type in jsonContent["damage_relations"]["no_damage_from"])
-                {
-                    workList.Add(type["name"].ToString());
-                }
-                ViewData["noDamage"] = workList.ToArray();
-
             }
+
             return View();
         }
     }
